@@ -1,0 +1,94 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Waves API",
+  "colors": {
+    "primary": "#16A34A",
+    "light": "#07C983",
+    "dark": "#15803D"
+  },
+  "favicon": "/favicon.svg",
+
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Docs",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "index",
+              "quickstart"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Endpoints",
+            "pages": [
+              "api-reference/tts"
+            ]
+          }
+        ]
+      }
+    ],
+
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Website",
+          "href": "https://smallest.ai",
+          "icon": "globe"
+        },
+        {
+          "anchor": "Support",
+          "href": "mailto:support@smallest.ai",
+          "icon": "life-ring"
+        }
+      ]
+    }
+  },
+
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+
+  "navbar": {
+    "links": [
+      {
+        "label": "API Status",
+        "href": "https://status.smallest.ai"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Dashboard",
+      "href": "https://waves.smallest.ai/dashboard"
+    }
+  },
+
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
+  },
+
+  "footer": {
+    "socials": {
+      "x": "https://x.com/smallest_ai",
+      "github": "https://github.com/smallest-ai",
+      "linkedin": "https://linkedin.com/company/smallest-ai"
+    }
+  }
+}

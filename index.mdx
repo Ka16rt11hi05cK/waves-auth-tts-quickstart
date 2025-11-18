@@ -1,0 +1,224 @@
+---
+title: "Waves API — Text-to-Speech Documentation"
+description: "Official documentation for the Waves Text-to-Speech API. Learn how to authenticate, send requests, explore voices, and generate high-quality audio."
+---
+
+# 🎙️ Waves Text-to-Speech API
+
+Waves provides ultra-fast, natural-sounding Text-to-Speech APIs with expressive, human-like voices.  
+Generate crystal-clear audio with a single HTTPS request — ideal for:
+
+- Voice assistants  
+- Audiobooks and content narration  
+- Customer support automation  
+- Accessibility tools  
+- Educational and language apps  
+
+---
+
+## 🚀 Quickstart — Make Your First TTS Request
+
+<Card
+  title="Start Here"
+  icon="rocket"
+  href="#quickstart"
+  horizontal
+>
+  Authenticate and generate your first spoken audio clip in less than 1 minute.
+</Card>
+
+---
+
+## 🔐 Authentication
+
+All requests to Waves require an **API Key**.
+
+Include it in the `Authorization` header:
+
+```http
+Authorization: Bearer YOUR_API_KEY
+<Warning> Never expose your API key in client-side code. </Warning>
+
+
+📡 Text-to-Speech API Overview
+<Columns cols={2}> <Card title="TTS Endpoint" icon="waveform" href="#tts-endpoint" > Generate natural audio from text using the v4 TTS API. </Card>
+<Card
+title="Voices List"
+icon="microphone"
+href="#voices"
+
+arduino
+Copy code
+Explore available voices and supported languages.
+</Card>
+<Card
+title="Audio Formats"
+icon="file-audio"
+href="#audio-formats"
+
+objectivec
+Copy code
+Output WAV, MP3, and more.
+</Card>
+<Card
+title="Error Codes"
+icon="alert-circle"
+href="#errors"
+
+matlab
+Copy code
+Understand and fix common API errors.
+</Card> </Columns>
+🏁 Quickstart {#quickstart}
+Here is the simplest way to generate audio:
+
+▶️ Endpoint
+bash
+Copy code
+POST https://waves.smallest.ai/v4/tts
+Required Headers
+Header	Value
+Authorization	Bearer YOUR_API_KEY
+Content-Type	application/json
+Accept	audio/wav (or audio/mp3)
+
+📤 Sample Request (curl)
+bash
+Copy code
+curl -X POST "https://waves.smallest.ai/v4/tts" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Accept: audio/wav" \
+  -d '{
+        "text": "Hello from Waves! This is your first Text to Speech API request.",
+        "voice": "arjun",
+        "language": "en"
+      }' --output output.wav
+If successful, the audio is saved as output.wav.
+
+📥 Example (JavaScript)
+javascript
+Copy code
+const fs = require("fs");
+const fetch = require("node-fetch");
+
+async function tts() {
+  const response = await fetch("https://waves.smallest.ai/v4/tts", {
+    method: "POST",
+    headers: {
+      "Authorization": "Bearer YOUR_API_KEY",
+      "Content-Type": "application/json",
+      "Accept": "audio/wav"
+    },
+    body: JSON.stringify({
+      text: "Hello from Waves!",
+      voice: "arjun",
+      language: "en"
+    })
+  });
+
+  const buffer = Buffer.from(await response.arrayBuffer());
+  fs.writeFileSync("output.wav", buffer);
+}
+
+tts();
+🐍 Example (Python)
+python
+Copy code
+import requests
+
+url = "https://waves.smallest.ai/v4/tts"
+
+headers = {
+    "Authorization": "Bearer YOUR_API_KEY",
+    "Content-Type": "application/json",
+    "Accept": "audio/wav"
+}
+
+data = {
+    "text": "Hello from Waves using Python!",
+    "voice": "arjun",
+    "language": "en"
+}
+
+response = requests.post(url, json=data)
+with open("output.wav", "wb") as f:
+    f.write(response.content)
+🔊 Text-to-Speech API Reference {#tts-endpoint}
+bash
+Copy code
+POST /v4/tts
+Generate speech audio from text.
+
+Request Body Parameters
+Field	Type	Required	Description
+text	string	Yes	Input text to convert to speech
+voice	string	Yes	Voice model ID
+language	string	Yes	Language code (e.g., "en")
+emotion	string	No	Optional emotion (e.g., "happy", "sad")
+speed	number	No	Speaking rate (0.5–2.0, default=1.0)
+format	string	No	"wav" or "mp3"
+
+Example Successful Response
+css
+Copy code
+<binary audio data>
+You will receive the audio file directly.
+
+🗣️ Voices List {#voices}
+Below are the commonly used voices:
+
+Voice	Gender	Language	Description
+arjun	Male	English	Clear, neutral voice ideal for general use
+meera	Female	English	Warm and expressive
+rahul	Male	Hindi	Natural Indian male voice
+aisha	Female	Hindi	Friendly and upbeat
+
+<Note> More voices are added frequently. Contact us for custom voices. </Note>
+🎧 Audio Formats {#audio-formats}
+Waves supports:
+
+Format	MIME Type	Notes
+WAV	audio/wav	Highest quality, uncompressed
+MP3	audio/mp3	Small file size, streaming-friendly
+
+Specify via:
+
+json
+Copy code
+"format": "mp3"
+❌ Error Codes {#errors}
+Code	Meaning	Fix
+401 — Invalid API Key	Authentication failed	Verify Authorization header
+400 — Missing fields	Required fields missing	Ensure text, voice, and language are present
+429 — Rate limit exceeded	Too many requests	Wait 1–2 seconds and retry
+500 — Server error	Internal error	Try again or contact support
+
+Example error:
+
+json
+Copy code
+{
+  "error": "Invalid API key"
+}
+🧩 Best Practices
+Keep text under 5,000 characters for best latency
+
+Reuse HTTP connections for faster calls
+
+Cache audio for repeated TTS requests
+
+Use MP3 for streaming use cases
+
+Use WAV when you need lossless quality
+
+💬 Need Help?
+If you need technical help, want to request a new voice, or have custom TTS requirements:
+
+
+title="Contact Support"
+icon="life-ring"
+href="mailto:support@smallest.ai"
+
+
+We're here to help you build with Waves.
